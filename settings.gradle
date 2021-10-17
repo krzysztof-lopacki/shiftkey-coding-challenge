@@ -1,2 +1,6 @@
-include ':app'
 rootProject.name = "Coding Challenge"
+include ':app'
+include ':common'
+include ':available-shifts-browser-data'
+include ':available-shifts-browser-domain'
+include ':available-shifts-browser-presentation'
