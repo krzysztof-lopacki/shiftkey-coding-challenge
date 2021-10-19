@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/shifts_browser_graph"
+    app:startDestination="@id/available_shifts_list">
+
+    <fragment
+        android:id="@+id/available_shifts_list"
+        android:name="com.shiftkey.codingchallenge.availableshiftsbrowser.presentation.screens.availableshiftslist.AvailableShiftsListFragment"
+        android:label="Available Shifts List"
+        tools:layout="@layout/fragment_available_shifts_list">
+        <action
+            android:id="@+id/to_shift_details"
+            app:destination="@id/shift_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/shift_details"
+        android:name="com.shiftkey.codingchallenge.availableshiftsbrowser.presentation.screens.shiftdetails.ShiftDetailsFragment"
+        android:label="Shift Details"
+        tools:layout="@layout/fragment_shift_details">
+        <argument
+            android:name="shiftId"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
+
+</navigation>
