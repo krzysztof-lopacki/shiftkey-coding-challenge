@@ -9,7 +9,7 @@ data class Shift(
     val endTime: Calendar,
     val normalizedStartDateTime: String,
     val normalizedEndDateTime: String,
-    val timezone: String,
+    val timezone: TimeZone,
     val premiumRate: Boolean,
     val covid: Boolean,
     val shiftKind: String,
