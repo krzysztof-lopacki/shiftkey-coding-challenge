@@ -1,12 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+
+        <variable
+            name="shift"
+            type="com.shiftkey.codingchallenge.availableshiftsbrowser.presentation.models.Shift" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Shift details" />
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Skill & Specialty -->
+        <View
+            android:id="@+id/specialty_color"
+            android:layout_width="10dp"
+            android:layout_height="0dp"
+            android:background="@{shift.specialtyColor}"
+            app:layout_constraintBottom_toBottomOf="@+id/specialty"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/skill_header"
+            tools:background="#ff0000" />
+
+        <TextView
+            android:id="@+id/skill_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:paddingTop="8dp"
+            android:text="@string/shift_details_skill"
+            android:textSize="32sp"
+            app:layout_constraintStart_toEndOf="@id/specialty_color"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/skill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:text="@{shift.skill}"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/specialty_color"
+            app:layout_constraintTop_toBottomOf="@id/skill_header"
+            tools:text="Long Term Care" />
+
+        <TextView
+            android:id="@+id/specialty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:paddingBottom="8dp"
+            android:text="@{shift.specialty}"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/specialty_color"
+            app:layout_constraintTop_toBottomOf="@id/skill"
+            tools:text="Certified Nursing Aide" />
+
+        <View
+            android:id="@+id/skill_time_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/shift_details_divider_color"
+            app:layout_constraintTop_toBottomOf="@id/specialty" />
+
+        <!-- Time -->
+        <View
+            android:id="@+id/time_color"
+            android:layout_width="10dp"
+            android:layout_height="0dp"
+            android:background="@color/shift_details_time_color"
+            app:layout_constraintBottom_toBottomOf="@+id/time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/skill_time_divider" />
+
+        <TextView
+            android:id="@+id/time_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:paddingTop="8dp"
+            android:text="@string/shift_details_time"
+            android:textSize="32sp"
+            app:layout_constraintStart_toEndOf="@id/time_color"
+            app:layout_constraintTop_toBottomOf="@id/specialty" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:text="@{shift.date}"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/time_color"
+            app:layout_constraintTop_toBottomOf="@id/time_header"
+            tools:text="June 7, 2021" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:paddingBottom="8dp"
+            android:text="@{shift.startTime + ` - ` + shift.endTime}"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/time_color"
+            app:layout_constraintTop_toBottomOf="@id/date"
+            tools:text="14:00 - 22:00" />
+
+        <View
+            android:id="@+id/time_facility_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/shift_details_divider_color"
+            app:layout_constraintTop_toBottomOf="@id/time" />
+
+        <!-- Facility -->
+        <View
+            android:id="@+id/facility_color"
+            android:layout_width="10dp"
+            android:layout_height="0dp"
+            android:background="@{shift.facilityColor}"
+            app:layout_constraintBottom_toBottomOf="@+id/distance"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/time_facility_divider"
+            tools:background="#0000ff"/>
+
+        <TextView
+            android:id="@+id/facility_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:paddingTop="8dp"
+            android:text="@string/shift_details_facility"
+            android:textSize="32sp"
+            app:layout_constraintStart_toEndOf="@id/facility_color"
+            app:layout_constraintTop_toBottomOf="@id/time" />
+
+        <TextView
+            android:id="@+id/facility_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:text="@{shift.facilityType}"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/facility_color"
+            app:layout_constraintTop_toBottomOf="@id/facility_header"
+            tools:text="Skilled Nursing Facility" />
+
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:paddingBottom="8dp"
+            android:text="@{@string/shift_details_distance(shift.distance)}"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/facility_color"
+            app:layout_constraintTop_toBottomOf="@id/facility_type"
+            tools:text="&lt; 10 mi." />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/shift_details_divider_color"
+            app:layout_constraintTop_toBottomOf="@id/distance" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

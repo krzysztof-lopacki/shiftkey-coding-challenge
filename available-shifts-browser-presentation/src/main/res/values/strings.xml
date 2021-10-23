@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="available_shifts_list_footer_retry">Retry</string>
+    <string name="available_shifts_list_refresh_failed">Refresh failed</string>
+
+    <string name="shift_details_skill">Skill</string>
+    <string name="shift_details_time">Time</string>
+    <string name="shift_details_facility">Facility</string>
+    <string name="shift_details_distance">&lt; %1$d mi.</string>
+
+</resources>

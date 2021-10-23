@@ -21,8 +21,8 @@
         android:label="Shift Details"
         tools:layout="@layout/fragment_shift_details">
         <argument
-            android:name="shiftId"
-            app:argType="string"
+            android:name="shift"
+            app:argType="com.shiftkey.codingchallenge.availableshiftsbrowser.presentation.models.Shift"
             app:nullable="false" />
     </fragment>
 

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="shift"
+            type="com.shiftkey.codingchallenge.availableshiftsbrowser.presentation.models.Shift" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/color_block"
+            android:layout_width="10dp"
+            android:layout_height="0dp"
+            android:background="@{shift.specialtyColor}"
+            app:layout_constraintBottom_toBottomOf="@+id/shift_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="#ff0000" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{shift.specialty}"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/color_block"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Certified Nursing Aide" />
+
+        <TextView
+            android:id="@+id/shift_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:paddingBottom="8dp"
+            android:text="@{shift.startTime + ` - ` + shift.endTime}"
+            app:layout_constraintStart_toEndOf="@id/color_block"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:text="12:00 - 20:00" />
+
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{shift.day}"
+            android:textSize="12sp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/name"
+            tools:text="Monday" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
