@@ -57,6 +57,7 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
     implementation "androidx.paging:paging-rxjava3:$paging_version"
+    implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
 
     implementation project(':available-shifts-browser-domain')
     implementation project(':available-shifts-browser-data')

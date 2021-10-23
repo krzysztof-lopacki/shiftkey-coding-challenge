@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hints_repository_shared_preferences">hints_repository_shared_preferences</string>
+    <string name="hints_repository_hint_read_key">hints_%1d_read</string>
+
+    <string name="hint_repository_hint_1">You may swipe down to refresh the available shifts list.</string>
+    <string name="hint_repository_hint_2">Click the cell to check the shift details.</string>
+</resources>

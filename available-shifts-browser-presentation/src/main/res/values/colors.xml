@@ -2,4 +2,6 @@
 <resources>
     <color name="shift_details_divider_color">#cccccc</color>
     <color name="shift_details_time_color">#666666</color>
+
+    <color name="hint_list_button_color">#FF018786</color>
 </resources>

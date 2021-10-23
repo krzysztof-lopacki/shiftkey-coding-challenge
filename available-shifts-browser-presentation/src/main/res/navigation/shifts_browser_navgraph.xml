@@ -17,6 +17,11 @@
             app:exitAnim="@anim/exit_anim"
             app:popEnterAnim="@anim/pop_enter_anim"
             app:popExitAnim="@anim/pop_exit_anim" />
+
+        <action
+            android:id="@+id/to_hints_list"
+            app:destination="@id/hints_pager" />
+
     </fragment>
 
     <fragment
@@ -29,5 +34,11 @@
             app:argType="com.shiftkey.codingchallenge.availableshiftsbrowser.presentation.models.Shift"
             app:nullable="false" />
     </fragment>
+
+    <dialog
+        android:id="@+id/hints_pager"
+        android:name="com.shiftkey.codingchallenge.availableshiftsbrowser.presentation.screens.hint.HintsListFragment"
+        tools:layout="@layout/fragment_hints_pager" />
+
 
 </navigation>

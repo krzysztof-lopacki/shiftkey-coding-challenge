@@ -10,4 +10,8 @@
     <string name="shift_details_facility">Facility</string>
     <string name="shift_details_distance">&lt; %1$d mi.</string>
 
+    <string name="hints_title">Hint</string>
+    <string name="hint_next_button">Next</string>
+    <string name="hint_close_button">Close</string>
+
 </resources>

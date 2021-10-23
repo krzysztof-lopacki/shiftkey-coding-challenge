@@ -4,9 +4,11 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.shiftkey.codingchallenge.availableshiftsbrowser.remote.shifts.ShiftsApi
 import com.shiftkey.codingchallenge.availableshiftsbrowser.repository.AvailableShiftsRepository
+import com.shiftkey.codingchallenge.availableshiftsbrowser.repository.HintsRepository
 import com.shiftkey.codingchallenge.availableshiftsbrowser.repository.RetrofitBasedAvailableShiftsRepository
 import com.shiftkey.codingchallenge.gson.CalendarDeserializer
 import com.shiftkey.codingchallenge.gson.TimezoneDeserializer
+import com.shiftkey.codingchallenge.hintsrepository.ResourcesBasedHintsRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -25,6 +27,9 @@ abstract class DataModule {
 
     @Binds
     abstract fun bindAvailableShiftsRepository(implementation: RetrofitBasedAvailableShiftsRepository): AvailableShiftsRepository
+
+    @Binds
+    abstract fun bindHintsRepository(implementation: ResourcesBasedHintsRepository): HintsRepository
 
     companion object {
         @Singleton

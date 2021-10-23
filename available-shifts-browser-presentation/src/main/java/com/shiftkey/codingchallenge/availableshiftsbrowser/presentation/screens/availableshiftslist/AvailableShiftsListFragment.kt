@@ -128,6 +128,9 @@ class AvailableShiftsListFragment : Fragment(R.layout.fragment_available_shifts_
                     is NavigationEffect.ShowShiftDetails -> {
                         findNavController().navigate(AvailableShiftsListFragmentDirections.toShiftDetails(navigationEffect.shift))
                     }
+                    NavigationEffect.ShowHints -> {
+                        findNavController().navigate(AvailableShiftsListFragmentDirections.toHintsList())
+                    }
                 }
                 true
             }

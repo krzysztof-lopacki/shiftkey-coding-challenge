@@ -6,19 +6,25 @@ import com.shiftkey.codingchallenge.availableshiftsbrowser.config.Configuration
 import com.shiftkey.codingchallenge.availableshiftsbrowser.presentation.models.Shift
 import com.shiftkey.codingchallenge.availableshiftsbrowser.presentation.models.ShiftsListItem
 import com.shiftkey.codingchallenge.availableshiftsbrowser.usecases.GetAvailableShiftsUseCase
+import com.shiftkey.codingchallenge.availableshiftsbrowser.usecases.GetUnreadHintsCountUseCase
 import com.shiftkey.codingchallenge.livedata.HandleableEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.coroutines.flow.map
 import java.util.*
 import javax.inject.Inject
 
+private const val STATE_HINTS_SHOWN_KEY = "hints_shown_key"
 
 @ExperimentalPagingApi
 @HiltViewModel
 class AvailableShiftsListViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
     configuration: Configuration,
+    getUnreadHintsCountUseCase: GetUnreadHintsCountUseCase,
     getAvailableShiftsUseCase: GetAvailableShiftsUseCase
 ) : ViewModel() {
+    private val subscriptions = CompositeDisposable()
     private val _viewEffect = MutableLiveData<HandleableEvent<ViewEffect>>()
     val viewEffect: LiveData<HandleableEvent<ViewEffect>> = _viewEffect
     private val _navigationEffect = MutableLiveData<HandleableEvent<NavigationEffect>>()
@@ -27,6 +33,7 @@ class AvailableShiftsListViewModel @Inject constructor(
         isLoading = true,
         shifts = MutableLiveData(null)))
     val state: LiveData<State> = _state
+    private val showingHintAllowed = savedStateHandle.getLiveData(STATE_HINTS_SHOWN_KEY, true)
 
     init {
         val shifts = Pager(
@@ -45,19 +52,29 @@ class AvailableShiftsListViewModel @Inject constructor(
             }
             .cachedIn(viewModelScope)
             .asLiveData()
+
         _state.value = _state.value?.copy(
             isLoading = false,
             shifts = shifts
         )
+
+        if (showingHintAllowed.value == true) {
+            showingHintAllowed.value = false
+            subscriptions.add(
+                getUnreadHintsCountUseCase.execute().subscribe { count ->
+                    if (count > 0) {
+                        _navigationEffect.value = HandleableEvent(NavigationEffect.ShowHints)
+                    }
+                }
+            )
+        }
     }
 
     fun onEvent(event: ViewEvent) {
         when (event) {
             ViewEvent.OnRetryClicked -> _viewEffect.value = HandleableEvent(ViewEffect.RetryDataLoading)
             ViewEvent.OnRefreshRequested -> _viewEffect.value = HandleableEvent(ViewEffect.InvalidateShiftsList)
-            is ViewEvent.OnShiftClicked -> _navigationEffect.value = HandleableEvent(
-                NavigationEffect.ShowShiftDetails(event.shift)
-            )
+            is ViewEvent.OnShiftClicked -> _navigationEffect.value = HandleableEvent(NavigationEffect.ShowShiftDetails(event.shift))
         }
     }
 
@@ -66,6 +83,11 @@ class AvailableShiftsListViewModel @Inject constructor(
         val shifts: LiveData<PagingData<ShiftsListItem>>
     )
 
+    override fun onCleared() {
+        super.onCleared()
+        subscriptions.clear()
+    }
+
     sealed class ViewEffect {
         object RetryDataLoading : ViewEffect()
         object InvalidateShiftsList : ViewEffect()
@@ -73,6 +95,7 @@ class AvailableShiftsListViewModel @Inject constructor(
 
     sealed class NavigationEffect {
         data class ShowShiftDetails(val shift: Shift) : NavigationEffect()
+        object ShowHints : NavigationEffect()
     }
 
     sealed class ViewEvent {
