@@ -36,5 +36,7 @@ ext {
     paging_version = '3.1.0-beta01'
     recyclerview_version = '1.2.1'
     rxjava_version = '3.1.2'
+    rxandroid_version = '3.0.0'
     retrofit_version = '2.9.0'
+    mockito_version = '4.0.0'
 }

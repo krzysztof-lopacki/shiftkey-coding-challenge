@@ -23,7 +23,7 @@ class HintsListViewModel @Inject constructor(
     val state: LiveData<State> = _state
     private val _navigationEffect = MutableLiveData<HandleableEvent<NavigationEffect>>()
     val navigationEffect: LiveData<HandleableEvent<NavigationEffect>> = _navigationEffect
-    lateinit var hints: MutableList<Hint>
+    private lateinit var hints: MutableList<Hint>
 
     init {
         loadHints()

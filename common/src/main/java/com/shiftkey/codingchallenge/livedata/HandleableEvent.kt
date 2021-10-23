@@ -24,4 +24,24 @@ class HandleableEvent<T> (private val payload: T) {
         isHandled = handler(payload)
         return isHandled
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as HandleableEvent<*>
+
+        if (payload != other.payload) return false
+        if (isHandled != other.isHandled) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = payload?.hashCode() ?: 0
+        result = 31 * result + isHandled.hashCode()
+        return result
+    }
+
+
 }
